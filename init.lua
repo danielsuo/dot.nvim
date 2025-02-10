@@ -203,6 +203,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Auto update treesitter to load commands.
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    vim.cmd 'TSUpdate'
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -685,7 +692,7 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>ft',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
@@ -876,6 +883,9 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      require('mini.files').setup()
+      require('mini.pairs').setup()
+      require('mini.bracketed').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -902,7 +912,23 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'cpp', 'diff', 'go', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'proto', 'python', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'cpp',
+        'diff',
+        'go',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'proto',
+        'python',
+        'query',
+        'vim',
+        'vimdoc',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
