@@ -949,8 +949,8 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
   {
-    url = 'sso://user/fentanes/nvgoog',
-    import = 'nvgoog.default',
+    url = 'sso://user/dsuo/nvim',
+    import = 'nvim.google',
   },
 }, {
   ui = {
